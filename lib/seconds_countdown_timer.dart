@@ -4,9 +4,11 @@ import 'package:flutter/widgets.dart';
 import 'package:seconds_countdown_timer/seconds_current_remaining_time.dart';
 import 'package:seconds_countdown_timer/seconds_countdown_timer_controller.dart';
 
-typedef CountdownTimerWidgetBuilder = Widget Function(BuildContext context, SecondsCurrentRemainingTime? time);
+typedef CountdownTimerWidgetBuilder = Widget Function(
+    BuildContext context, SecondsCurrentRemainingTime? time);
 
-class SecondsCountdownTimer extends StatefulWidget implements SecondsCountdownTimerUtils {
+class SecondsCountdownTimer extends StatefulWidget
+    implements SecondsCountdownTimerUtils {
   const SecondsCountdownTimer({
     super.key,
     required this.endTime,
@@ -17,8 +19,14 @@ class SecondsCountdownTimer extends StatefulWidget implements SecondsCountdownTi
 
   /// End time in seconds
   final int endTime;
+
+  /// start date of the timer
   final DateTime startDate;
+
+  /// call your function when the timer`s finished
   final VoidCallback? onEnd;
+
+  /// your customized widget goes here
   final CountdownTimerWidgetBuilder? widgetBuilder;
 
   @override
@@ -28,9 +36,11 @@ class SecondsCountdownTimer extends StatefulWidget implements SecondsCountdownTi
 class _SecondsCountdownTimerState extends State<SecondsCountdownTimer> {
   late SecondsCountdownTimerController controller;
 
-  SecondsCurrentRemainingTime? get currentRemainingTime => controller.currentRemainingTime;
+  SecondsCurrentRemainingTime? get currentRemainingTime =>
+      controller.currentRemainingTime;
 
-  CountdownTimerWidgetBuilder get widgetBuilder => widget.widgetBuilder ?? builderCountdownTimer;
+  CountdownTimerWidgetBuilder get widgetBuilder =>
+      widget.widgetBuilder ?? builderCountdownTimer;
 
   void initController() {
     controller = SecondsCountdownTimerController(
@@ -68,7 +78,8 @@ class _SecondsCountdownTimerState extends State<SecondsCountdownTimer> {
     return widgetBuilder(context, currentRemainingTime);
   }
 
-  Widget builderCountdownTimer(BuildContext context, SecondsCurrentRemainingTime? time) {
+  Widget builderCountdownTimer(
+      BuildContext context, SecondsCurrentRemainingTime? time) {
     return Text("$time");
   }
 }

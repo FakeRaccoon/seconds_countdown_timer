@@ -1,3 +1,11 @@
-## 0.0.1
+## 0.0.5
 
-* TODO: Describe initial release.
+* add more informations to readme.
+
+## 0.0.6
+
+* add example.
+
+## 0.0.7
+
+* fix timer return null on first render.

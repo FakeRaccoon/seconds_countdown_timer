@@ -35,7 +35,8 @@ class SecondsCountdownTimerController extends ChangeNotifier {
 
   bool get isRunning => _isRunning;
 
-  SecondsCurrentRemainingTime? get currentRemainingTime => _currentRemainingTime;
+  SecondsCurrentRemainingTime? get currentRemainingTime =>
+      _currentRemainingTime;
 
   set endTime(int endTime) => _endTime = endTime;
 
@@ -44,18 +45,21 @@ class SecondsCountdownTimerController extends ChangeNotifier {
     _isRunning = true;
     var epoch = _startDate!.millisecondsSinceEpoch + (_endTime * 1000);
     _endDate = DateTime.fromMillisecondsSinceEpoch(epoch);
-    if (_isRunning) _runPeriodic();
+    _onPeriodic();
+    if (_isRunning) {
+      _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+        _onPeriodic();
+      });
+    }
   }
 
-  void _runPeriodic() {
-    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      _currentRemainingTime = _calculateRemainingTime();
-      notifyListeners();
-      if (_currentRemainingTime == null) {
-        onEnd?.call();
-        _disposeTimer();
-      }
-    });
+  void _onPeriodic() {
+    _currentRemainingTime = _calculateRemainingTime();
+    notifyListeners();
+    if (_currentRemainingTime == null) {
+      onEnd?.call();
+      _disposeTimer();
+    }
   }
 
   void _disposeTimer() {
@@ -63,10 +67,12 @@ class SecondsCountdownTimerController extends ChangeNotifier {
     _timer = null;
   }
 
+  /// calculate date difference based on endtime provided
   SecondsCurrentRemainingTime? _calculateRemainingTime() {
     var endEpoch = _endDate!.millisecondsSinceEpoch - 1000;
     _endDate = DateTime.fromMillisecondsSinceEpoch(endEpoch);
-    int remaining = ((endEpoch - _startDate!.millisecondsSinceEpoch) / 1000).floor();
+    int remaining =
+        ((endEpoch - _startDate!.millisecondsSinceEpoch) / 1000).floor();
 
     if (remaining <= 0) return null;
 
@@ -96,7 +102,8 @@ class SecondsCountdownTimerController extends ChangeNotifier {
 
     sec = remaining.toInt();
 
-    return SecondsCurrentRemainingTime(days: days, hours: hours, min: min, sec: sec);
+    return SecondsCurrentRemainingTime(
+        days: days, hours: hours, min: min, sec: sec);
   }
 
   @override
