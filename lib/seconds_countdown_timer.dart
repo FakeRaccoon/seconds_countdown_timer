@@ -10,12 +10,12 @@ typedef CountdownTimerWidgetBuilder = Widget Function(
 class SecondsCountdownTimer extends StatefulWidget
     implements SecondsCountdownTimerUtils {
   const SecondsCountdownTimer({
-    super.key,
+    Key? key,
     required this.endTime,
     required this.startDate,
     this.widgetBuilder,
     this.onEnd,
-  });
+  }) : super(key: key);
 
   /// End time in seconds
   final int endTime;

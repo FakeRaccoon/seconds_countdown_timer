@@ -1,11 +1,10 @@
 name: seconds_countdown_timer
 description: "package that provide countdown timer with customized widget."
-version: 0.0.6
+version: 0.0.9
 homepage: https://github.com/FakeRaccoon/seconds_countdown_timer
-repository: https://github.com/FakeRaccoon/seconds_countdown_timer
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=2.16.0 <4.0.0"
   flutter: ">=3.13.9"
 
 dependencies:
