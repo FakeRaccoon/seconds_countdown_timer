@@ -6,10 +6,10 @@ import 'package:seconds_countdown_timer/seconds_current_remaining_time.dart';
 class SecondsCountdownTimerController extends ChangeNotifier {
   SecondsCountdownTimerController({
     required int endTime,
-    required DateTime endDate,
+    required DateTime startDate,
     this.onEnd,
   })  : _endTime = endTime,
-        _startDate = endDate;
+        _startDate = startDate;
 
   /// DateTime when timer started
   final DateTime? _startDate;
@@ -56,7 +56,7 @@ class SecondsCountdownTimerController extends ChangeNotifier {
   void _onPeriodic() {
     _currentRemainingTime = _calculateRemainingTime();
     notifyListeners();
-    if (_currentRemainingTime == null) {
+    if (_currentRemainingTime == null && _endTime != 0) {
       onEnd?.call();
       _disposeTimer();
     }

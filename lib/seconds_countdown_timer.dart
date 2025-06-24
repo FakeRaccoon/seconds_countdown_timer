@@ -45,7 +45,7 @@ class _SecondsCountdownTimerState extends State<SecondsCountdownTimer> {
   void initController() {
     controller = SecondsCountdownTimerController(
       endTime: widget.endTime,
-      endDate: widget.startDate,
+      startDate: widget.startDate,
       onEnd: widget.onEnd,
     );
     if (controller.isRunning == false) {

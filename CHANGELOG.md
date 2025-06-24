@@ -21,3 +21,7 @@
 ## 0.1.0
 
 * package compatibility.
+
+## 0.2.0
+
+* package compatibility.

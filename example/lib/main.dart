@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: SecondsCountdownTimer(
-          endTime: 60,
-          startDate: DateTime.now(),
+          endTime: 60, // Get static value from backend
+          startDate: DateTime.now(), // Get static value from backend
           widgetBuilder: (context, time) {
             if (time == null) return const SizedBox.shrink();
             String hour =
