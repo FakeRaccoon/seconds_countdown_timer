@@ -10,6 +10,6 @@
 
 * package compatibility.
 
-## 0.2.0
+## 0.2.1
 
 * fix onEnd called on zero intial value.
